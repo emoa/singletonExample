@@ -14,13 +14,17 @@ const Color = (() => {
   let single;
 
   let init = function() {
+
+    // private function to get three random values of color rgb
     let rgbRandomValues = function() {
       let values = [];
       for (let i = 0; i < 3; i++)
         values.push(Math.floor(Math.random() * 256));
       return values;
     };
+    
 
+    // private function to split a string in rows
     let splitIntoRows = function*(obj) {
       let length = getLength(obj),
         row = Number(arguments[1]) || 1,
@@ -33,6 +37,7 @@ const Color = (() => {
     };
 
     return {
+      // methods to get a random color in formats rgb, rgb and hexadecimal
       random: {
         get rgb() {
           return 'rgb(' + rgbRandomValues().join(', ') + ')';
@@ -46,6 +51,7 @@ const Color = (() => {
           return '#' + rgbRandomValues().map(value => value.toString(16)).join('');
         }
       },
+      // methods to transform rgb to hexadecimal and vice versa
       transform: {
         rgb(hex) {
           if (isString(hex) && hex.startsWith('#')) {
@@ -68,6 +74,8 @@ const Color = (() => {
     }
   }
 })();
+
+// Testing
 
 let color = Color.instance;
 
