@@ -22,18 +22,18 @@ const Color = (() => {
         values.push(Math.floor(Math.random() * 256));
       return values;
     };
-    
+
 
     // private function to split a string in rows
     let splitIntoRows = function*(obj) {
       let length = getLength(obj),
         row = Number(arguments[1]) || 1,
-        rowLength = row < 0 ? 1 : row,
-        i = 0,
-        slice = Function.prototype.call.bind((isString(obj) ? String : Array)['prototype'].slice);
+        rowLength = Math.max(Math.min(row, length), 0),
+        i = 0;
 
       while (i < length)
-        yield slice(obj, i, i += rowLength);
+        yield(isString(obj) ? String : Array)
+        .prototype.slice.call(obj, i, i += rowLength);
     };
 
     return {
